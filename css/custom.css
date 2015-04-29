@@ -1,8 +1,3 @@
-body {
-    padding-top: 70px;
-    background: url('../img/1.png')
-}
-
 .portfolio-item {
     margin-bottom: 25px;
 }
@@ -79,4 +74,22 @@ footer {
 
 .panel-cover {
   width:214px;
+}
+
+.jumbotron {
+  color: #fff;
+  margin-left: -10%;
+  margin-right: -10%;
+}
+
+.jumbotron p {
+  font-size: 12px;
+}
+
+.jumbotron img {
+  position: absolute;
+  height: 240px;
+  top: 8px;
+  right: 10%;
+  width: auto;
 }
