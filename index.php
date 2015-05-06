@@ -4,10 +4,11 @@
   <meta charset="utf-8">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/custom.min.css" rel="stylesheet">
+  <link href="css/ui.css" rel="stylesheet">
+  <link href='http://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
 </head>
-
 <body>
-  <nav class="navbar navbar-inverse navbar-fixed-top">
+  <nav class="navbar navbar-ct-blue navbar-default navbar-fixed-top">
     <div class="container">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -50,7 +51,7 @@
 
   <div class="full-width-bar">
     <div class="container">
-      <h4>Top 100 Rated</h4>  
+      <p>Top 100 Rated</p>  
     </div>
   </div>
   <div class="container"> 

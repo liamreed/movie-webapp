@@ -1,13 +1,13 @@
+p {
+  margin: auto;
+}
+
 .portfolio-item {
     margin-bottom: 25px;
 }
 
 footer {
     margin: 50px 0;
-}
-
-.navbar-inverse {
-    background-color: rgba(34, 34, 34, 0.9);
 }
 
 .top-header {
@@ -17,19 +17,19 @@ footer {
     -moz-background-size: cover;
     background-size: cover;
     -o-background-size: cover;
-     margin-top: -70px;
 }
 
 .tagline {
   margin-top: 130px;
   color: #fff;
-  background: rgba(34, 34, 34, 0.9);
+  background: #34ACDC;
   display: inline-block;
   padding: 10px;
+  border-radius: 6px;
 }
 
 .full-width-bar {
-  background-color: #222;
+  background-color: #34ACDC;
   color: #fff;
   margin-bottom: 20px;
 }
@@ -42,12 +42,12 @@ footer {
 }
 
 .panel {
-  border: 1px solid #222;
+  border: 1px solid #34ACDC;
 }
 
 .panel-heading {
   position: relative;
-  background: rgba(34, 34, 34, 0.9);
+  background: #34ACDC;
   color: #fff;
   text-overflow:ellipsis;
   white-space:nowrap;
@@ -64,7 +64,7 @@ footer {
 
 .panel-footer {
   position: relative;
-  background-color: rgba(34, 34, 34, 0.9);
+  background-color: #34ACDC;
   border-top: none;
   color: #fff;
   margin-top: -40px;
@@ -78,8 +78,7 @@ footer {
 
 .jumbotron {
   color: #fff;
-  margin-left: -10%;
-  margin-right: -10%;
+  margin-top:80px;
 }
 
 .jumbotron p {
@@ -89,7 +88,12 @@ footer {
 .jumbotron img {
   position: absolute;
   height: 240px;
-  top: 8px;
+  top: 100px;
   right: 10%;
   width: auto;
+}
+
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+  background-color: rgba(255, 255, 255, 0);
+  color: #fff;
 }
