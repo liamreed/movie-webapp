@@ -51,10 +51,10 @@
 
   <div class="full-width-bar">
     <div class="container">
-      <p>Top 100 Rated</p>  
+      <p>Top 100 Rated</p>
     </div>
   </div>
-  <div class="container"> 
+  <div class="container">
     <div class="row">
       <div class="col-lg-12">
         <?php
@@ -62,12 +62,13 @@
         $pdo = Database::connect();
         $sql = 'SELECT * FROM film ORDER BY Rating DESC LIMIT 100';
         foreach ($pdo->query($sql) as $row) {
+          $padded = str_pad($row['FilmId'], 7, "0", STR_PAD_LEFT);
           echo '<div class="col-md-3 portfolio-item">
           <div class="panel panel-cover">
             <div class="panel-heading text-center">' . $row['FilmName'] . '</div>
             <div class="panel-body">
-              <a href="detail.php?id=' . $row['FilmId'] . '">
-                <img class="img-responsive img-cover" src="img/cover/'. $row['FilmId'] .'.jpg" alt="cover"></img>
+              <a href="detail.php?id=' . $padded . '">
+                <img class="img-responsive img-cover" src="img/cover/'. $padded .'.jpg" alt="cover"></img>
               </a>
             </div>
             <div class="panel-footer text-center">IMDB rating: '. $row['Rating'] . '</div>

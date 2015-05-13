@@ -20,7 +20,7 @@
       $.adaptiveBackground.run(defaults)
     });
   </script>
-  <?php 
+  <?php
   $filmID = htmlspecialchars($_GET['id']);
   ?>
 </head>
@@ -64,13 +64,14 @@
       $pdo = Database::connect();
       $sql = "SELECT * FROM film WHERE FilmId ='".$filmID."'";
       foreach ($pdo->query($sql) as $row) {
+        $padded = str_pad($row['FilmId'], 7, "0", STR_PAD_LEFT);
         echo '<h2>'. $row['FilmName'] . '</h2>';
         echo '<h5>IMDB Rating • '. $row['Rating'] . '/10</h5>';
-        echo '<img class="img-responsive img-cover" src="img/cover/'. $row['FilmId'] .'.jpg" alt="cover" data-adaptive-background="1"></img>';
-        echo '<p>Year • '. $row['Year'] . '</p>';
+        echo '<img class="img-responsive img-cover" src="img/cover/'. $padded .'.jpg" alt="cover" data-adaptive-background="1"></img>';
+        echo '<p>Release Date • '. $row['ReleaseDate'] . '</p>';
         echo '<p>Runtime • '. $row['RunTime'] . ' minutes</p>';
         echo '<a class="btn btn-primary" href="http://www.imdb.com/title/tt'.$row['FilmId'].'">IMDB</a>';
-      }   
+      }
         Database::disconnect();
       ?>
   </div>
@@ -80,7 +81,7 @@
       <div class="col-md-4">
         <div class="well">
             <div class="sidebar-nav">
-              <ul class="nav nav-list">        
+              <ul class="nav nav-list">
                 <li><a href="index">Country</a></li>
                 <li><a href="#">Rating</a></li>
                 <li><a href="#">Twitter</a></li>
@@ -93,7 +94,16 @@
       </div>
     <div class="col-md-8">
       <div class="well">
-        <p>Film synopsis here</p>
+        <?php
+        include 'database.php';
+        $pdo = Database::connect();
+        $sql = "SELECT * FROM film WHERE FilmId ='".$filmID."'";
+        foreach ($pdo->query($sql) as $row) {
+          $plot = strip_tags($row['Plot']);
+          echo '<p>'. $plot . '</p>';
+        }
+          Database::disconnect();
+        ?>
       </div>
     </div>
   </div>
