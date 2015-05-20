@@ -1,5 +1,5 @@
 p {
-  margin: auto;
+    margin: auto;
 }
 
 .portfolio-item {
@@ -11,89 +11,94 @@ footer {
 }
 
 .top-header {
-    height: 400px;
-    background: url('../img/banner/interstellar.jpg') top center no-repeat scroll;
+    height: 300px;
+    margin-top: -30px;
+    background: url(../img/banner/interstellar.jpg) top center no-repeat scroll;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
-    -o-background-size: cover;
+    -o-background-size: cover
 }
 
 .tagline {
-  margin-top: 130px;
-  color: #fff;
-  background: #34ACDC;
-  display: inline-block;
-  padding: 10px;
-  border-radius: 6px;
+    margin-top: 130px;
+    color: #fff;
+    background: #34495e;
+    display: inline-block;
+    border-radius: 6px
 }
 
 .full-width-bar {
-  background-color: #34ACDC;
-  color: #fff;
-  margin-bottom: 20px;
+    background-color: #34495e;
+    color: #fff;
+    margin-bottom: 20px
 }
 
 .img-cover {
-  height: 317px;
-  margin-left: auto;
-  margin-right: auto;
-  width: 214px;
+    height: 317px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 214px
 }
 
 .panel {
-  border: 1px solid #34ACDC;
+    border: 1px solid #34495e
 }
 
 .panel-heading {
-  position: relative;
-  background: #34ACDC;
-  color: #fff;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-  overflow: hidden;
-  border-top-right-radius: 0px;
-  border-top-left-radius: 0px;
-  border-bottom: none;
+    position: relative;
+    background: #34495e;
+    color: #fff;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    border-bottom: none
 }
 
 .panel-body {
-  padding: 0px;
-  margin-top: -40px;
+    padding: 0;
+    margin-top: -40px
 }
 
 .panel-footer {
-  position: relative;
-  background-color: #34ACDC;
-  border-top: none;
-  color: #fff;
-  margin-top: -40px;
-  border-bottom-right-radius: 0px;
-  border-bottom-left-radius: 0px;
+    position: relative;
+    background-color: #34495e;
+    border-top: none;
+    color: #fff;
+    margin-top: -40px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0
 }
 
 .panel-cover {
-  width:214px;
+    width: 214px;
+    font-size: 12px
 }
 
 .jumbotron {
-  color: #fff;
-  margin-top:80px;
+    color: #fff;
+    margin-top: 80px
 }
 
 .jumbotron p {
-  font-size: 12px;
+    font-size: 12px
 }
 
 .jumbotron img {
-  position: absolute;
-  height: 240px;
-  top: 100px;
-  right: 12%;
-  width: auto;
+    position: absolute;
+    height: 240px;
+    top: 100px;
+    right: 12%;
+    width: auto
 }
 
-.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
-  background-color: rgba(255, 255, 255, 0);
-  color: #fff;
+.rounded {
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.rounded img {
+  padding:10px;
 }
