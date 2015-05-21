@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/custom.min.css" rel="stylesheet">
+  <link href="css/vendor/bootstrap.min.css" rel="stylesheet">
   <link href="css/flat-ui-pro.min.css" rel="stylesheet">
+  <link href="css/custom.min.css" rel="stylesheet">
 </head>
 <body>
-  
+
   <?php include 'navigation.php' ?>
 
   <header class="top-header">
@@ -51,8 +51,7 @@
     </div>
   </div>
 </div>
-<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<? php include 'footer.php' ?>
 </body>
 <footer>
 </footer>

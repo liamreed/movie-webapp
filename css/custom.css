@@ -38,7 +38,7 @@ footer {
     height: 317px;
     margin-left: auto;
     margin-right: auto;
-    width: 214px
+    width: 214px;
 }
 
 .panel {
@@ -94,11 +94,15 @@ footer {
     width: auto
 }
 
-.rounded {
+.detailHeader {
   border-radius: 5px;
   margin-bottom: 20px;
 }
 
-.rounded img {
+.detailHeader img {
   padding:10px;
+}
+
+.modal-dialog-center {
+    margin-top: 15%;
 }
