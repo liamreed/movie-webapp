@@ -6,7 +6,7 @@
   <link href="css/flat-ui-pro.min.css" rel="stylesheet">
   <link href="css/custom.min.css" rel="stylesheet">
   <?php
-  $filmID = htmlspecialchars($_GET['id']);
+  $userID = htmlspecialchars($_GET['user']);
   ?>
 </head>
 
@@ -16,75 +16,73 @@
 
     <div class="container">
       <div class="row">
-        <div class="row-same-height row-full-height">
         <div class="col-lg-12">
         <?php
           include 'database.php';
           $pdo = Database::connect();
-          $sql = "SELECT * FROM film WHERE FilmId ='".$filmID."'";
+          $sql = "SELECT * FROM customer WHERE CustomerId ='".$userID."'";
           foreach ($pdo->query($sql) as $row) {
-            $padded = str_pad($row['FilmId'], 7, "0", STR_PAD_LEFT);
             echo '<header class="detailHeader">';
             echo '<div class="col-md-8">';
-            echo '<h3>'. $row['FilmName'] . '</h3>';
-            echo '<p>IMDB Rating • '. $row['Rating'] . '/10</p>';
-            echo '<p>Release Date • '. $row['ReleaseDate'] . '</p>';
-            echo '<p>Runtime • '. $row['RunTime'] . ' minutes</p>';
-            echo '<p>Production Country • '. $row['Country'] . '</p>';
-            echo '<a class="btn btn-primary" href="http://www.imdb.com/title/tt'.$row['FilmId'].'">IMDB</a>';
+            echo '<h3>'. $row['UserName'] . '</h3>';
+            echo '<p>Real Name • '. $row['Name'] . '</p>';
+            echo '<p>User ID • '. $row['CustomerId'] . '</p>';
+            echo '<p>Email • '. $row['Email'] . '</p>';
             echo '</div>';
-            echo '<img class="img-responsive img-cover" src="img/cover/'. $padded .'.jpg" alt="cover" data-adaptive-background="1"></img>';
             echo '</header>';
-            echo '<div class="row">';
-            echo '<div class="col-md-2 col-md-height col-full-height">';
-            echo '<div class="iconbar"><ul>';
-            echo '<li data-toggle="modal" data-target="#watchedModal"><a class="fui-eye"></a></li>';
-            echo '<li data-toggle="modal" data-target="#twitterModal"><a class="fui-twitter"></a></li>';
-            echo '<li data-toggle="modal" data-target="#starredModal"><a class="fui-star-2"></a></li>';
-            echo '<li data-toggle="modal" data-target="#commentModal"><a class="fui-new"></a></li>';
-            echo '</ul></div> <!-- /iconbar -->';
             }
               Database::disconnect();
         ?>
-              </ul>
           </div>
+        </div>
 
-    <div class="col-md-8 col-md-height col-full-height">
+    <div class="col-lg-12">
         <?php
         include 'database.php';
         $pdo = Database::connect();
-        $sql = "SELECT * FROM film WHERE FilmId ='".$filmID."'";
+        $sql = "SELECT * FROM customerfilm INNER JOIN film on customerfilm.FilmId = film.FilmId WHERE Starred = 'yes' AND CustomerId ='".$userID."'";
+        echo "<h4>Starred Films</h4>";
         foreach ($pdo->query($sql) as $row) {
-          if ($row['Plot'] == "") {
-            echo '<p>Plot not available for this title</p>';
-          }
-          $plot = strip_tags($row['Plot']);
-          echo '<p>'. $plot . '</p>';
+          $padded = str_pad($row['FilmId'], 7, "0", STR_PAD_LEFT);
+          echo '<div class="col-md-3 portfolio-item">
+          <div class="panel panel-cover">
+            <div class="panel-heading text-center">' . $row['FilmName'] . '</div>
+            <div class="panel-body">
+              <a href="detail.php?id=' . $row['FilmId'] . '">
+                <img class="img-responsive img-cover" src="img/cover/'. $padded .'.jpg" alt="cover"></img>
+              </a>
+            </div>
+            <div class="panel-footer text-center">Rated: '. $row['CustomerRating'] . '</div>
+          </div>
+        </div>';
         }
           Database::disconnect();
         ?>
+    </div>
 
-      </div>
-
-      <div class="col-md-8">
-        <h4>Comments</h4>
+    <div class="col-lg-12">
         <?php
         include 'database.php';
         $pdo = Database::connect();
-        $sql = "SELECT * FROM customerfilm INNER JOIN customer on customerfilm.CustomerId = customer.CustomerId WHERE FilmId ='".$filmID."' AND Comments != ''";
+        $sql = "SELECT * FROM customerfilm INNER JOIN film on customerfilm.FilmId = film.FilmId WHERE CustomerId ='".$userID."'";
+        echo "<h4>Seen Films</h4>";
         foreach ($pdo->query($sql) as $row) {
-          if ($row['Comments'] == "") {
-              echo '<p>No Comments</p>';
-            }
-          else {
-            $comment = strip_tags($row['Comments']);
-            echo '<blockquote><p>'. $comment . '</p><small><a href="profile.php?user=' . $row['CustomerId'] . '">' . $row['UserName'] . '</a></small></blockquote>';
-            }
-          }
+          $padded = str_pad($row['FilmId'], 7, "0", STR_PAD_LEFT);
+          echo '<div class="col-md-3 portfolio-item">
+          <div class="panel panel-cover">
+            <div class="panel-heading text-center">' . $row['FilmName'] . '</div>
+            <div class="panel-body">
+              <a href="detail.php?id=' . $row['FilmId'] . '">
+                <img class="img-responsive img-cover" src="img/cover/'. $padded .'.jpg" alt="cover"></img>
+              </a>
+            </div>
+            <div class="panel-footer text-center">Rated: '. $row['CustomerRating'] . '</div>
+          </div>
+        </div>';
+        }
           Database::disconnect();
         ?>
     </div>
-  </div>
 
 <!-- Watch List Modal -->
 <div class="modal fade" id="watchedModal" tabindex="-1" role="dialog" aria-labelledby="watchedModalLabel" aria-hidden="true">
@@ -144,8 +142,6 @@
 </div>
 
   </div>
-</div>
-</div>
 </div>
 <?php include 'footer.php' ?>
 <script src="js/jquery.adaptive-backgrounds.js"></script>

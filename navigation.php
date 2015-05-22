@@ -5,7 +5,7 @@ echo '<nav class="navbar navbar-static-top navbar-inverse" role="navigation">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-5">
             <span class="sr-only">Toggle navigation</span>
           </button>
-          <a class="navbar-brand" href="#">MovieDB</a>
+          <a class="navbar-brand" href="index.php">MovieDB</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -15,7 +15,7 @@ echo '<nav class="navbar navbar-static-top navbar-inverse" role="navigation">
             <li><a href="#">New</a></li>
             <li><a href="#">Genres</a></li>
            </ul>
-          <form class="navbar-form navbar-left" action="#" role="search">
+          <form class="navbar-form navbar-left" action="search.php" role="search">
             <div class="form-group">
               <div class="input-group">
                 <input class="form-control" id="navbarInput-01" type="search" placeholder="Search">
@@ -29,7 +29,7 @@ echo '<nav class="navbar navbar-static-top navbar-inverse" role="navigation">
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="#">Profile</a></li>
+                <li><a href="profile.php">Profile</a></li>
                 <li class="divider"></li>
                 <li><a href="#">Logout</a></li>
               </ul>
