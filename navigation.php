@@ -11,9 +11,9 @@ echo '<nav class="navbar navbar-static-top navbar-inverse" role="navigation">
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="navbar-collapse-5">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="index.php">Top</a></li>
+            <li><a href="index.php">Top</a></li>
             <li><a href="#">New</a></li>
-            <li><a href="#">Genres</a></li>
+            <li><a href="genres.php">Genres</a></li>
            </ul>
           <form class="navbar-form navbar-left" action="search.php" role="search">
             <div class="form-group">
