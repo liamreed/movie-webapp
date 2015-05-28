@@ -1,3 +1,18 @@
+<?php 
+include_once 'database.php';
+$pdo = Database::connect();
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+include_once 'includes/functions.php';
+sec_session_start ();
+
+if (login_check ( $pdo ) == true) {
+  
+  $logged = 'in';
+  header('Location: dashboard.php');
+} else {
+  $logged = 'out';
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +23,7 @@
 </head>
 <body>
 
-  <?php include 'navigation.php' ?>
+  <?php include_once 'includes/navigation.php' ?>
 
   <header class="top-header">
     <div class="container">
@@ -51,7 +66,7 @@
     </div>
   </div>
 </div>
-<?php include 'footer.php' ?>
+<?php include_once 'footer.php' ?>
 </body>
 <footer>
 </footer>

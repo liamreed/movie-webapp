@@ -8,7 +8,7 @@
 </head>
 <body>
 
-  <?php include 'navigation.php' ?>
+  <?php include_once 'includes/navigation.php' ?>
 
   <div class="container">
     <div class="row">
@@ -62,4 +62,4 @@
   </div>
 </div>
 </body>
-<?php include 'footer.php' ?>
+<?php include_once 'includes/footer.php' ?>

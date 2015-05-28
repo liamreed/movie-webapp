@@ -12,7 +12,7 @@
 
 <body>
 
-<?php include 'navigation.php' ?>
+<?php include_once 'includes/navigation.php' ?>
 
     <div class="container">
       <div class="row">
@@ -147,7 +147,7 @@
 </div>
 </div>
 </div>
-<?php include 'footer.php' ?>
+<?php include_once 'includes/footer.php' ?>
 <script src="js/jquery.adaptive-backgrounds.js"></script>
 <script>
   var defaults = {

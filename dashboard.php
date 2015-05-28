@@ -1,5 +1,5 @@
 <?php
-include_once 'functions.php';
+include_once 'includes/functions.php';
 include_once 'database.php';
 sec_session_start();
 
@@ -11,24 +11,41 @@ if (login_check($pdo) != true) {
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/vendor/bootstrap.min.css" rel="stylesheet">
+  <link href="css/flat-ui-pro.min.css" rel="stylesheet">
   <link href="css/custom.min.css" rel="stylesheet">
-  <link href="css/flat-ui.min.css" rel="stylesheet">
-  <link href='http://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
 </head>
 <body>
   
-  <?php include 'navigation.php'; ?>
+  <?php include_once 'includes/navigation.php'; 
 
-  <header class="top-header">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <h1 class="tagline">Interstellar</h1>
-        </div>
-      </div>
+  if (isset ( $_GET ['error'] )) {
+  echo '<p class="error">Error with login</p>';
+  } ?>
+
+  <div class="col-lg-12">
+        <?php
+        include 'database.php';
+        $pdo = Database::connect();
+        $sql = "SELECT * FROM customerfilm INNER JOIN film on customerfilm.FilmId = film.FilmId WHERE CustomerId ='".$userID."'";
+        echo "<h4>Seen Films</h4>";
+        foreach ($pdo->query($sql) as $row) {
+          $padded = str_pad($row['FilmId'], 7, "0", STR_PAD_LEFT);
+          echo '<div class="col-md-3 portfolio-item">
+          <div class="panel panel-cover">
+            <div class="panel-heading text-center">' . $row['FilmName'] . '</div>
+            <div class="panel-body">
+              <a href="detail.php?id=' . $row['FilmId'] . '">
+                <img class="img-responsive img-cover" src="img/cover/'. $padded .'.jpg" alt="cover"></img>
+              </a>
+            </div>
+            <div class="panel-footer text-center">Rated: '. $row['CustomerRating'] . '</div>
+          </div>
+        </div>';
+        }
+          Database::disconnect();
+        ?>
     </div>
-  </header>
 
   <div class="full-width-bar">
     <div class="container">
