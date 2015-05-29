@@ -1,5 +1,7 @@
 <?php
 include_once 'database.php';
+$pdo = Database::connect();
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 function sec_session_start() {
 	$session_name = 'sec_session_id'; // Set a custom session name
 	$secure = SECURE;
@@ -20,8 +22,8 @@ function sec_session_start() {
 }
 function login($email, $password, $pdo) {
 	// Using prepared statements means that SQL injection is not possible.
-	$prep_stmt = "SELECT id, username, password, salt
-        FROM members
+	$prep_stmt = "SELECT CustomerId, username, password, salt
+        FROM customer
        WHERE email = ?
         LIMIT 1";
 	$stmt = $pdo->prepare ( $prep_stmt );
@@ -31,7 +33,7 @@ function login($email, $password, $pdo) {
 	$member = $stmt->fetch ( PDO::FETCH_ASSOC );
 	if ($member) {
 		// hash the password with the unique salt.
-		 $user_id =$member["id"];
+		 $user_id =$member["CustomerId"];
 		 $username =$member["username"];
 		 $db_password =$member["password"];
 		 $salt =$member["salt"];
@@ -112,8 +114,8 @@ function login_check($pdo) {
 		$user_browser = $_SERVER ['HTTP_USER_AGENT'];
 		
 		if ($stmt = $pdo->prepare ( "SELECT password 
-                                      FROM members 
-                                      WHERE id = ? LIMIT 1" )) {
+                                      FROM customer 
+                                      WHERE CustomerId = ? LIMIT 1" )) {
 			// Bind "$user_id" to parameter.
 			$stmt->execute ( array (
 					$user_id 

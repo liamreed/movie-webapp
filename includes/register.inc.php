@@ -1,5 +1,5 @@
  <?php
-	include_once '../database.php';
+	include_once 'database.php';
 	$pdo = Database::connect();
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	
@@ -28,7 +28,7 @@
 		// breaking these rules.
 		//
 		
-		$prep_stmt = "SELECT id FROM members WHERE email = ? LIMIT 1";
+		$prep_stmt = "SELECT CustomerId FROM customer WHERE email = ? LIMIT 1";
 		$stmt = $pdo->prepare ( $prep_stmt );
 		$stmt->execute ( array (
 				$email 
@@ -41,7 +41,7 @@
 			// A user with this email address already exists
 			$error_msg .= '<p class="error">A user with this email address already exists.</p>';
 		}
-		$prep_stmt = "SELECT id FROM members WHERE username = ? LIMIT 1";
+		$prep_stmt = "SELECT CustomerId FROM customer WHERE username = ? LIMIT 1";
 		$stmt = $pdo->prepare ( $prep_stmt );
 		$stmt->execute ( array (
 				$username 
@@ -67,7 +67,7 @@
 			$password = hash ( 'sha512', $password . $random_salt );
 			
 			// Insert the new user into the database
-			if ($insert_stmt = $pdo->prepare ( "INSERT INTO members (username, email, password, salt) VALUES (?, ?, ?, ?)" )) {
+			if ($insert_stmt = $pdo->prepare ( "INSERT INTO customer (username, email, password, salt) VALUES (?, ?, ?, ?)" )) {
 				
 				// Execute the prepared query.
 				if (! $insert_stmt->execute ( array (

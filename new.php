@@ -20,27 +20,13 @@ if (login_check ( $pdo ) == true) {
 
   <?php include_once 'includes/navigation.php' ?>
 
-  <header class="top-header">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <h1 class="tagline">Interstellar</h1>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <div class="full-width-bar">
-    <div class="container">
-      Top 100 Rated
-    </div>
-  </div>
   <div class="container">
+  <h3>New Additions</h3>
     <div class="row">
       <div class="col-lg-12">
         <?php
         $pdo = Database::connect();
-        $sql = 'SELECT * FROM film ORDER BY Rating DESC LIMIT 100';
+        $sql = 'SELECT * FROM film ORDER BY ReleaseDate DESC LIMIT 100';
         foreach ($pdo->query($sql) as $row) {
           $padded = str_pad($row['FilmId'], 7, "0", STR_PAD_LEFT);
           echo '<div class="col-md-3 portfolio-item">

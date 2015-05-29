@@ -12,7 +12,7 @@ echo '<nav class="navbar navbar-static-top navbar-inverse" role="navigation">
         <div class="collapse navbar-collapse" id="navbar-collapse-5">
           <ul class="nav navbar-nav">
             <li><a href="index.php">Top</a></li>
-            <li><a href="#">New</a></li>
+            <li><a href="new.php">New</a></li>
             <li><a href="genres.php">Genres</a></li>
            </ul>
           <form class="navbar-form navbar-left" action="search.php" role="search">

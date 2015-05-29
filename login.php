@@ -1,5 +1,5 @@
 <?php 
-include_once 'database.php';
+include_once 'includes/database.php';
 $pdo = Database::connect();
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 include_once 'includes/functions.php';
@@ -38,7 +38,7 @@ sec_session_start ();
     <div class="row">
       <div class="col-lg-12">
         <form id="loginForm" method="post" name="login_form"
-      action="process_login.php" >
+      action="includes/process_login.php" >
       <table id="inputTable">
         <tr>
           <td>&nbsp;</td>
@@ -73,7 +73,7 @@ sec_session_start ();
 if (login_check ( $pdo ) == true) {
   echo '<p>Currently logged ' . $logged . ' as ' . htmlentities ( $_SESSION ['username'] ) . '.</p>';
   
-  echo '<p>Do you want to change user? <a href="logout.php">Log out</a>.</p>';
+  echo '<p>Do you want to change user? <a href="includes/logout.php">Log out</a>.</p>';
 } else {
   echo '<p>Currently logged ' . $logged . '.</p>';
   echo "<p>If you don't have a login, please <a href='register.php'>register</a></p>";

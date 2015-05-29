@@ -1,3 +1,20 @@
+<?php include_once 'includes/functions.php';
+
+$userID = null;
+
+if (empty($_GET)) {
+	echo 'Error retrieving profile information';
+}
+else {
+		if($_GET['user']){
+			$userID = htmlspecialchars($_GET['user']);
+		}
+		else {
+			$userID = htmlspecialchars($_['user_id']);
+		}
+}
+	
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,9 +22,6 @@
   <link href="css/vendor/bootstrap.min.css" rel="stylesheet">
   <link href="css/flat-ui-pro.min.css" rel="stylesheet">
   <link href="css/custom.min.css" rel="stylesheet">
-  <?php
-  $userID = htmlspecialchars($_GET['user']);
-  ?>
 </head>
 
 <body>
@@ -18,7 +32,6 @@
       <div class="row">
         <div class="col-lg-12">
         <?php
-          include 'database.php';
           $pdo = Database::connect();
           $sql = "SELECT * FROM customer WHERE CustomerId ='".$userID."'";
           foreach ($pdo->query($sql) as $row) {
@@ -38,7 +51,6 @@
 
     <div class="col-lg-12">
         <?php
-        include 'database.php';
         $pdo = Database::connect();
         $sql = "SELECT * FROM customerfilm INNER JOIN film on customerfilm.FilmId = film.FilmId WHERE Starred = 'yes' AND CustomerId ='".$userID."'";
         echo "<h4>Starred Films</h4>";
@@ -62,7 +74,6 @@
 
     <div class="col-lg-12">
         <?php
-        include 'database.php';
         $pdo = Database::connect();
         $sql = "SELECT * FROM customerfilm INNER JOIN film on customerfilm.FilmId = film.FilmId WHERE CustomerId ='".$userID."'";
         echo "<h4>Seen Films</h4>";
@@ -84,16 +95,24 @@
         ?>
     </div>
 
-<!-- Watch List Modal -->
-<div class="modal fade" id="watchedModal" tabindex="-1" role="dialog" aria-labelledby="watchedModalLabel" aria-hidden="true">
+<!-- Seen List Modal -->
+<div class="modal fade" id="seenModal" tabindex="-1" role="dialog" aria-labelledby="seenModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-center">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="watchedModalLabel">Add to Watched List?</h4>
+        <h4 class="modal-title" id="seenModalLabel">Add to Seen List?</h4>
       </div>
       <div class="modal-body">
-        <p>Are you sure you wish to add this title to your Watched List?</p>
+        <p>Select a seen date</p>
+        <div class="form-group">
+		  <div class="input-group">
+		    <span class="input-group-btn">
+		      <button class="btn" type="button"><span class="fui-calendar"></span></button>
+		    </span>
+		    <input type="text" class="form-control" value="1 Jan, 2013" id="datepicker-01" />
+		  </div>
+		</div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
@@ -142,7 +161,6 @@
 </div>
 
   </div>
-</div>
 <?php include_once 'includes/footer.php' ?>
 <script src="js/jquery.adaptive-backgrounds.js"></script>
 <script>

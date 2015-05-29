@@ -24,5 +24,6 @@
 echo '<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?"http":"https";if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document, "script", "twitter-wjs");</script>
   <script>function fbshareCurrentPage(){window.open("https://www.facebook.com/sharer/sharer.php?u="+escape(window.location.href)+"&t="+document.title, "", "menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600");return false; }</script>
   <script src="js/vendor/jquery.min.js"></script>
+  <script src="js/vendor/jquery-ui.min.js"></script>
   <script src="js/flat-ui-pro.min.js"></script>';
 ?>

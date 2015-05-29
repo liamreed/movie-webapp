@@ -16,7 +16,7 @@
         <?php
         if (isset($_GET['genre'])):
           $genre = htmlspecialchars($_GET['genre']);
-          include 'database.php';
+          include 'includes/database.php';
           $pdo = Database::connect();
           $sql = "SELECT * FROM genre WHERE GenreName = '".$genre."'";
           foreach ($pdo->query($sql) as $row) {
@@ -46,7 +46,7 @@
               Database::disconnect();
         else:
           echo '<h3>All Genres</h3>';
-          include 'database.php';
+          include 'includes/database.php';
           $pdo = Database::connect();
           $sql = 'SELECT * FROM genre';
           foreach ($pdo->query($sql) as $row) {
@@ -60,6 +60,5 @@
     </div>
     </div>
   </div>
-</div>
 </body>
 <?php include_once 'includes/footer.php' ?>

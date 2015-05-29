@@ -1,3 +1,6 @@
+<?php include_once 'includes/functions.php';
+$filmID = htmlspecialchars($_GET['id']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,9 +8,6 @@
   <link href="css/vendor/bootstrap.min.css" rel="stylesheet">
   <link href="css/flat-ui-pro.min.css" rel="stylesheet">
   <link href="css/custom.min.css" rel="stylesheet">
-  <?php
-  $filmID = htmlspecialchars($_GET['id']);
-  ?>
 </head>
 
 <body>
@@ -19,7 +19,6 @@
         <div class="row-same-height row-full-height">
         <div class="col-lg-12">
         <?php
-          include 'database.php';
           $pdo = Database::connect();
           $sql = "SELECT * FROM film WHERE FilmId ='".$filmID."'";
           foreach ($pdo->query($sql) as $row) {
@@ -38,7 +37,7 @@
             echo '<div class="row">';
             echo '<div class="col-md-2 col-md-height col-full-height">';
             echo '<div class="iconbar"><ul>';
-            echo '<li data-toggle="modal" data-target="#watchedModal"><a class="fui-eye"></a></li>';
+            echo '<li data-toggle="modal" data-target="#seenModal"><a class="fui-eye"></a></li>';
             echo '<li data-toggle="modal" data-target="#twitterModal"><a class="fui-twitter"></a></li>';
             echo '<li data-toggle="modal" data-target="#starredModal"><a class="fui-star-2"></a></li>';
             echo '<li data-toggle="modal" data-target="#commentModal"><a class="fui-new"></a></li>';
@@ -46,12 +45,10 @@
             }
               Database::disconnect();
         ?>
-              </ul>
-          </div>
+    </div>
 
     <div class="col-md-8 col-md-height col-full-height">
         <?php
-        include 'database.php';
         $pdo = Database::connect();
         $sql = "SELECT * FROM film WHERE FilmId ='".$filmID."'";
         foreach ($pdo->query($sql) as $row) {
@@ -69,7 +66,6 @@
       <div class="col-md-8">
         <h4>Comments</h4>
         <?php
-        include 'database.php';
         $pdo = Database::connect();
         $sql = "SELECT * FROM customerfilm INNER JOIN customer on customerfilm.CustomerId = customer.CustomerId WHERE FilmId ='".$filmID."' AND Comments != ''";
         foreach ($pdo->query($sql) as $row) {
@@ -86,16 +82,24 @@
     </div>
   </div>
 
-<!-- Watch List Modal -->
-<div class="modal fade" id="watchedModal" tabindex="-1" role="dialog" aria-labelledby="watchedModalLabel" aria-hidden="true">
+<!-- Seen List Modal -->
+<div class="modal fade" id="seenModal" tabindex="-1" role="dialog" aria-labelledby="seenModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-center">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="watchedModalLabel">Add to Watched List?</h4>
+        <h4 class="modal-title" id="seenModalLabel">Add to Seen List?</h4>
       </div>
       <div class="modal-body">
-        <p>Are you sure you wish to add this title to your Watched List?</p>
+        <p>Select a seen date</p>
+        <div class="form-group">
+		  <div class="input-group">
+		    <span class="input-group-btn">
+		      <button class="btn" type="button"><span class="fui-calendar"></span></button>
+		    </span>
+		    <input type="text" class="form-control" value="1 Jan, 2013" id="datepicker-01" />
+		  </div>
+		</div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
@@ -145,10 +149,28 @@
 
   </div>
 </div>
-</div>
-</div>
 <?php include_once 'includes/footer.php' ?>
 <script src="js/jquery.adaptive-backgrounds.js"></script>
+<script>
+var myDate = new Date();
+var curDate =(myDate.getMonth()+1) + '/' + myDate.getDate() + '/' +
+        myDate.getFullYear();
+$("#datepicker-01").datepicker('setDate', new Date());
+$("#datepicker-01").val(curDate);
+var datepickerSelector = $('#datepicker-01');
+datepickerSelector.datepicker({
+  showOtherMonths: true,
+  selectOtherMonths: true,
+  dateFormat: 'd MM, yy',
+  yearRange: '-1:+1'
+}).prev('.input-group-btn').on('click', function (e) {
+  e && e.preventDefault();
+  datepickerSelector.focus();
+});
+$.extend($.datepicker, { _checkOffset: function (inst,offset,isFixed) { return offset; } });
+
+datepickerSelector.datepicker('widget').css({ 'margin-left': -datepickerSelector.prev('.input-group-btn').find('.btn').outerWidth() + 3 });
+</script>
 <script>
   var defaults = {
     normalizeTextColor:   true,

@@ -1,11 +1,13 @@
 <?php
 include_once 'includes/functions.php';
-include_once 'database.php';
+
 sec_session_start();
 
 if (login_check($pdo) != true) {
   header('Location: login.php');
 }
+
+$userID = htmlspecialchars($_SESSION['user_id']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,7 +27,6 @@ if (login_check($pdo) != true) {
 
   <div class="col-lg-12">
         <?php
-        include 'database.php';
         $pdo = Database::connect();
         $sql = "SELECT * FROM customerfilm INNER JOIN film on customerfilm.FilmId = film.FilmId WHERE CustomerId ='".$userID."'";
         echo "<h4>Seen Films</h4>";
@@ -56,7 +57,6 @@ if (login_check($pdo) != true) {
     <div class="row">
       <div class="col-lg-12">
         <?php
-        include 'database.php';
         $pdo = Database::connect();
         $sql = 'SELECT * FROM film ORDER BY Rating DESC LIMIT 100';
         foreach ($pdo->query($sql) as $row) {
