@@ -1,8 +1,6 @@
 <?php 
-include_once 'includes/database.php';
-$pdo = Database::connect();
-$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 include_once 'includes/functions.php';
+
 sec_session_start ();
 
   if (login_check ( $pdo ) == true) {

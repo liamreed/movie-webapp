@@ -1,4 +1,8 @@
-<?php include_once 'includes/functions.php';
+<?php 
+
+include_once 'includes/functions.php';
+
+sec_session_start();
 
 $userID = null;
 
@@ -10,7 +14,7 @@ else {
 			$userID = htmlspecialchars($_GET['user']);
 		}
 		else {
-			$userID = htmlspecialchars($_['user_id']);
+			$userID = htmlspecialchars($_SESSION['user_id']);
 		}
 }
 	
