@@ -15,10 +15,10 @@ echo '<nav class="navbar navbar-static-top navbar-inverse" role="navigation">
             <li><a href="new.php">New</a></li>
             <li><a href="genres.php">Genres</a></li>
            </ul>
-          <form class="navbar-form navbar-left" action="search.php" role="search">
+          <form class="navbar-form navbar-left" action="search.php" method="post" role="search">
             <div class="form-group">
               <div class="input-group">
-                <input class="form-control" id="navbarInput-01" type="search" placeholder="Search">
+                <input class="form-control" name="searchInput" id="searchInput" type="search" placeholder="Search">
                 <span class="input-group-btn">
                   <button type="submit" class="btn"><span class="fui-search"></span></button>
                 </span>
