@@ -2,3 +2,5 @@
 /sftp-config.json
 /deployment-config.json
 includes/database.php
+
+includes/psl-config.php

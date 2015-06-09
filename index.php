@@ -1,11 +1,9 @@
 <?php 
 include_once 'includes/functions.php';
+include_once 'includes/db_connect.php';;
 sec_session_start ();
-if (login_check ( $pdo ) == true) {
-  $logged = 'in';
-  header('Location: dashboard.php');
-} else {
-  $logged = 'out';
+if (login_check($pdo) == true) {
+	header('Location: dashboard.php');
 }
 ?>
 <!DOCTYPE html>
@@ -62,5 +60,3 @@ if (login_check ( $pdo ) == true) {
 </div>
 <?php include_once 'includes/footer.php' ?>
 </body>
-<footer>
-</footer>

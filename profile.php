@@ -1,23 +1,24 @@
 <?php 
-
 include_once 'includes/functions.php';
+include_once 'includes/db_connect.php';
 
 sec_session_start();
 
+if (login_check($pdo) != true) {
+	header('Location: login.php');
+}
+
 $userID = null;
 
-if (empty($_GET)) {
-	echo 'Error retrieving profile information';
-}
-else {
-		if($_GET['user']){
+		if($_GET['user']) {
 			$userID = htmlspecialchars($_GET['user']);
 		}
-		else {
+		elseif($_SESSION['user_id']) {
 			$userID = htmlspecialchars($_SESSION['user_id']);
 		}
-}
-	
+		else {
+			echo 'Error retrieving profile information';
+		}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,6 +54,7 @@ else {
           </div>
         </div>
 
+    <div class="row">
     <div class="col-lg-12">
         <?php
         $pdo = Database::connect();
@@ -75,7 +77,9 @@ else {
           Database::disconnect();
         ?>
     </div>
-
+    </div>
+    
+    <div class="row">
     <div class="col-lg-12">
         <?php
         $pdo = Database::connect();
@@ -97,6 +101,7 @@ else {
         }
           Database::disconnect();
         ?>
+    </div>
     </div>
 
 <!-- Seen List Modal -->

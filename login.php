@@ -26,17 +26,14 @@ sec_session_start ();
 <body>
 
 <?php
-
   include_once 'includes/navigation.php';
-
   ?>
 
   <div class="container">
     <h4>Login</h4>
     <div class="row">
       <div class="col-lg-12">
-        <form id="loginForm" method="post" name="login_form"
-      action="includes/process_login.php" >
+        <form id="loginForm" name="login_form" action="includes/process_login.php" method="post">
       <table id="inputTable">
         <tr>
           <td>&nbsp;</td>
@@ -63,10 +60,10 @@ sec_session_start ();
         <tr>
           <td>&nbsp;</td>
         </tr>
-
       </table>
     </form>
       </div>
+      
       <?php
 if (login_check ( $pdo ) == true) {
   echo '<p>Currently logged ' . $logged . ' as ' . htmlentities ( $_SESSION ['username'] ) . '.</p>';

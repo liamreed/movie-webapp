@@ -1,7 +1,6 @@
 <?php
-include_once 'database.php';
-$pdo = Database::connect();
-$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+include_once 'psl-config.php';
+include_once 'db_connect.php';
 function sec_session_start() {
 	$session_name = 'sec_session_id'; // Set a custom session name
 	$secure = SECURE;
@@ -9,7 +8,7 @@ function sec_session_start() {
 	$httponly = true;
 	// Forces sessions to only use cookies.
 	if (ini_set ( 'session.use_only_cookies', 1 ) === FALSE) {
-		header ( "Location: error.php?err=Could not initiate a safe session (ini_set)" );
+		header ( "Location: ../error.php?err=Could not initiate a safe session (ini_set)" );
 		exit ();
 	}
 	// Gets current cookies params.
@@ -22,9 +21,9 @@ function sec_session_start() {
 }
 function login($email, $password, $pdo) {
 	// Using prepared statements means that SQL injection is not possible.
-	$prep_stmt = "SELECT CustomerId, username, password, salt
+	$prep_stmt = "SELECT CustomerId, UserName, Password, Salt
         FROM customer
-       WHERE email = ?
+       WHERE Email = ?
         LIMIT 1";
 	$stmt = $pdo->prepare ( $prep_stmt );
 	$stmt->execute ( array (
@@ -34,9 +33,9 @@ function login($email, $password, $pdo) {
 	if ($member) {
 		// hash the password with the unique salt.
 		 $user_id =$member["CustomerId"];
-		 $username =$member["username"];
-		 $db_password =$member["password"];
-		 $salt =$member["salt"];
+		 $username =$member["UserName"];
+		 $db_password =$member["Password"];
+		 $salt =$member["Salt"];
 		$password = hash ( 'sha512', $password . $salt );
 		
 		// If the user exists we check if the account is locked
@@ -113,7 +112,7 @@ function login_check($pdo) {
 		// Get the user-agent string of the user.
 		$user_browser = $_SERVER ['HTTP_USER_AGENT'];
 		
-		if ($stmt = $pdo->prepare ( "SELECT password 
+		if ($stmt = $pdo->prepare ( "SELECT Password 
                                       FROM customer 
                                       WHERE CustomerId = ? LIMIT 1" )) {
 			// Bind "$user_id" to parameter.
@@ -124,7 +123,7 @@ function login_check($pdo) {
 			$data = $stmt->fetch ( PDO::FETCH_ASSOC );
 			if ($data) {
 				
-				$login_check = hash ( 'sha512', $data["password"] . $user_browser );
+				$login_check = hash ( 'sha512', $data["Password"] . $user_browser );
 				
 				if ($login_check == $login_string) {
 					// Logged In!!!!

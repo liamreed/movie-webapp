@@ -31,7 +31,7 @@ echo '<nav class="navbar navbar-static-top navbar-inverse" role="navigation">
               <ul class="dropdown-menu">
                 <li><a href="profile.php">Profile</a></li>
                 <li class="divider"></li>
-                <li><a href="includes/logout.php">Logout</a></li>
+                <li><a href="includes/logout.php">Login/Logout</a></li>
               </ul>
             </li>
           </ul>

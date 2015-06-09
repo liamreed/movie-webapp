@@ -1,5 +1,7 @@
 <?php
-include 'functions.php';
+include_once 'functions.php';
+include_once 'db_connect.php'; 
+
 sec_session_start(); // Our custom secure way of starting a PHP session.
  
 if (isset($_POST['email'], $_POST['p'])) {
@@ -7,15 +9,13 @@ if (isset($_POST['email'], $_POST['p'])) {
     $password = $_POST['p']; // The hashed password.
  	 
     if (login($email, $password, $pdo) == true) {
-        // Login success 
-        echo 'login successful';
-        header('Location: ../dashboard.php');
+    	// Login success
+    	header('Location: ../dashboard.php');
     } else {
-        // Login failed 
-        echo 'error';
-        header('Location: login.php?error=1');
+    	// Login failed
+    	header('Location: ../login.php?error=1');
     }
 } else {
     // The correct POST variables were not sent to this page. 
     echo 'Invalid Request';
-}?>
+}

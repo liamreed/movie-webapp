@@ -1,12 +1,7 @@
 <?php 
 include_once 'includes/functions.php';
+include_once 'includes/db_connect.php';
 sec_session_start ();
-if (login_check ( $pdo ) == true) {
-  $logged = 'in';
-  header('Location: dashboard.php');
-} else {
-  $logged = 'out';
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
